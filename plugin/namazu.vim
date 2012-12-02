@@ -62,7 +62,7 @@ function! s:NamazuMain()
 
    enew
    silent! exe 'edit ++enc='.&enc.' ++ff='.&ff.' '.file
-   silent! setlocal nobackup noswf
+   silent! setlocal nobackup noswf nocursorline
 
    if has('syntax') && g:namazu_color == 1
       syntax match Title /\v^\d+(,\d+)?\. .*$/
