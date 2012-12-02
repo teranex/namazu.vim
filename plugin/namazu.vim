@@ -51,11 +51,16 @@ if exists('g:namazu_disable')
    finish
 endif
 
-function! s:NamazuMain()
+function! s:NamazuMain(...)
    call s:NamazuInit()
    let file = tempname()
    let file = substitute(file, '\v\d+$', '__Namazu__', '')
-   let keyword = input('Enter keyword: ')
+
+   if len(a:000) > 0
+      let keyword = join(a:000)
+   else
+      let keyword = input('Enter keyword: ')
+   endif
 
    let winno = bufwinnr('__Namazu__')
    silent! exe winno.'wincmd w'
@@ -223,5 +228,5 @@ function! s:NamazuInit()
    let s:namazu_cmd   = g:namazu_cmd
 endfun
 
-command! Namazu call s:NamazuMain()
+command! -nargs=* Namazu call s:NamazuMain(<f-args>)
 
